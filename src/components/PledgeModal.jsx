@@ -165,7 +165,8 @@ export default function PledgeModal({ wish, onClose }) {
               </div>
 
               <p className="pledge-aside">
-                Nothing serious — info used for following up and guilt tripping.
+                Relax! follow-ups and thank-yous only. Plus a reserved right to
+                guilt-trip you, affectionately, if you pledge and then go quiet.
               </p>
 
               <div>
