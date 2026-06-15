@@ -27,3 +27,6 @@ dist-ssr
 # Local reference only
 Minimal Product Display/
 prd.md
+
+# Graphify
+graphify-out/*
