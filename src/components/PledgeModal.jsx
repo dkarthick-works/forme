@@ -164,6 +164,10 @@ export default function PledgeModal({ wish, onClose }) {
                 </div>
               </div>
 
+              <p className="pledge-aside">
+                Nothing serious — info used for following up and guilt tripping.
+              </p>
+
               <div>
                 <label className="block text-[12.5px] font-semibold text-[var(--text-2)] mb-[5px]">
                   Team / Group

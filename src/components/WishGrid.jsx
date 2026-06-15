@@ -97,7 +97,7 @@ function WishToolbar({
 
 export default function WishGrid({ wishes, loading, error, onPledge }) {
   const [view, setView] = useState('grid')
-  const [sort, setSort] = useState('price-asc')
+  const [sort, setSort] = useState('price-desc')
   const [listFilter, setListFilter] = useState('open')
   const layoutClass = view === 'list' ? 'wish-list' : 'wish-grid'
 

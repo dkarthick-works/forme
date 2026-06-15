@@ -561,6 +561,14 @@ textarea.input {
   background: var(--border);
 }
 
+.pledge-aside {
+  font-size: 13px;
+  color: var(--text-muted);
+  line-height: 1.55;
+  font-style: italic;
+  margin: -4px 0 0;
+}
+
 @keyframes fadeIn {
   from {
     opacity: 0;
