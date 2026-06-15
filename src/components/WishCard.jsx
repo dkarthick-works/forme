@@ -14,7 +14,7 @@ function ProductPlaceholder({ name, gifted }) {
   )
 }
 
-export default function WishCard({ wish, onPledge }) {
+export default function WishCard({ wish, layout = 'grid', onPledge }) {
   const f = wish.fields
   const name = f['Product Name']
   const price = f.Price
@@ -22,7 +22,9 @@ export default function WishCard({ wish, onPledge }) {
   const gifted = f.Select === 'Gifted'
   const [imgErr, setImgErr] = useState(false)
 
-  const cardClass = ['wish-card', gifted && 'gifted'].filter(Boolean).join(' ')
+  const cardClass = ['wish-card', layout === 'list' && 'list', gifted && 'gifted']
+    .filter(Boolean)
+    .join(' ')
 
   return (
     <div className={cardClass}>

@@ -1,7 +1,9 @@
-export default function SkeletonCard() {
+export default function SkeletonCard({ layout = 'grid' }) {
+  const cardClass = ['wish-card', layout === 'list' && 'list'].filter(Boolean).join(' ')
+
   return (
-    <div className="wish-card">
-      <div className="skeleton" style={{ height: 210 }} />
+    <div className={cardClass}>
+      <div className="skeleton img-skeleton" />
       <div className="card-body">
         <div
           className="skeleton"

@@ -1,7 +1,10 @@
-export function sortWishes(list) {
+export function sortByPrice(list, sortBy = 'price-asc') {
+  const dir = sortBy === 'price-desc' ? -1 : 1
+
   return [...list].sort((a, b) => {
-    if (a.fields.Select === 'Gifted' && b.fields.Select !== 'Gifted') return 1
-    if (b.fields.Select === 'Gifted' && a.fields.Select !== 'Gifted') return -1
+    const aPrice = Number(a.fields.Price) || 0
+    const bPrice = Number(b.fields.Price) || 0
+    if (aPrice !== bPrice) return (aPrice - bPrice) * dir
     return 0
   })
 }
@@ -30,4 +33,12 @@ export function productEmoji(name = '') {
 export function cardGradient(gifted) {
   if (gifted) return 'linear-gradient(135deg,#EDEAE5 0%,#E2DED8 100%)'
   return 'linear-gradient(135deg,#F5F0EA 0%,#EDE8E0 100%)'
+}
+
+export function getOpenWishes(list) {
+  return list.filter((w) => w.fields.Select !== 'Gifted')
+}
+
+export function getClaimedWishes(list) {
+  return list.filter((w) => w.fields.Select === 'Gifted')
 }

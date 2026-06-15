@@ -41,7 +41,9 @@ export default function PledgeModal({ wish, onClose }) {
           phone: form.phone,
           team: form.team,
           message: form.message,
-          item: itemName,
+          item: f._bundleItems
+            ? `${itemName} — ${f._bundleItems}`
+            : itemName,
         }),
       })
 
