@@ -1,16 +1,77 @@
-# React + Vite
+# Karthicks Wishlist
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+A public gadget wishlist where friends and family browse items, see what's already claimed, and pledge a gift. Built as a static React SPA.
 
-Currently, two official plugins are available:
+## Features
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+- **Live wishlist** — products, prices, images, and claimed status from Airtable via a Cloudflare Worker
+- **Grid / list views** — toggle layout; sort by price (default: high → low)
+- **Wishlist / Claimed tabs** — open items and gifted items in separate views with counts
+- **Bundle card** — pledge every open item in one go from a full-width CTA at the end of the list
+- **Pledge modal** — Formspree submission with name, optional contact fields, team/group, and message
 
-## React Compiler
+## Stack
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+| Layer | Choice |
+|-------|--------|
+| UI | React 19, Vite 8, Tailwind CSS 4 |
+| Data | Cloudflare Worker → Airtable (`records` format) |
+| Pledges | [Formspree](https://formspree.io) |
 
-## Expanding the ESLint configuration
+Layout-critical styles live in `src/index.css`; Tailwind handles spacing utilities.
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+## Getting started
+
+```bash
+npm install
+cp .env.example .env   # add your Formspree form ID
+npm run dev
+```
+
+Open [http://localhost:5173](http://localhost:5173).
+
+### Environment variables
+
+| Variable | Description |
+|----------|-------------|
+| `VITE_API_URL` | Worker endpoint for wishes (defaults to production URL) |
+| `VITE_FORMSPREE_ID` | Formspree form ID for pledge submissions |
+
+## Scripts
+
+```bash
+npm run dev      # local dev server
+npm run build    # production build → dist/
+npm run preview  # serve dist/ locally
+npm run lint     # ESLint
+```
+
+## Project structure
+
+```
+src/
+├── App.jsx                 # shell: header, grid, pledge modal
+├── components/
+│   ├── Header.jsx
+│   ├── WishGrid.jsx        # toolbar, filters, sort, layout
+│   ├── WishCard.jsx
+│   ├── WishBundleCard.jsx
+│   ├── PledgeModal.jsx
+│   └── SkeletonCard.jsx
+├── hooks/useWishes.js      # fetch + state for wishlist data
+├── utils/wishes.js         # sort, filter, price formatting
+└── config.js               # API_URL, FORMSPREE_ID
+```
+
+## Data model
+
+The Worker returns Airtable records as-is. Relevant fields:
+
+- `Product Name`, `Price`, `URL`, image URL
+- `Select`: `Open` (available) or `Gifted` (claimed)
+
+Bundle pledges send a synthetic item to Formspree with a semicolon-separated list of all open product names in the `item` field.
+
+## Deploy
+
+`npm run build` outputs a static site in `dist/`. Deploy to any static host (Cloudflare Pages, Netlify, etc.) and set the `VITE_*` env vars at build time.
