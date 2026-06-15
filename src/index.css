@@ -347,6 +347,9 @@ textarea.input {
 .wish-card.list .card-actions {
   max-width: 320px;
 }
+.wish-card.list .bundle-card .card-actions {
+  max-width: none;
+}
 .wish-card.list .skeleton.img-skeleton {
   width: 132px;
   min-width: 132px;
@@ -505,14 +508,13 @@ textarea.input {
   font-size: 22px;
   margin-bottom: 16px;
 }
+.bundle-card .card-actions {
+  width: 100%;
+}
 .bundle-btn {
   width: 100%;
-  max-width: 280px;
   padding: 12px 20px;
   font-size: 15px;
-}
-.wish-card.list .bundle-btn {
-  max-width: 320px;
 }
 
 .skeleton {
