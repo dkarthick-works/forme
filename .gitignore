@@ -33,3 +33,9 @@ graphify-out/*
 
 # Local product narrative (not committed)
 app-story/
+
+# wrangler files
+.wrangler
+.dev.vars*
+!.dev.vars.example
+!.env.example
